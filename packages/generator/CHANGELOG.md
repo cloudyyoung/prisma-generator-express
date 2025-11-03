@@ -1,3 +1,14 @@
+## [1.16.7](https://github.com/multipliedtwice/prisma-generator-express/compare/v1.16.6...v1.16.7) (2025-11-03)
+
+
+### Bug Fixes
+
+* Bump dependencies ([dd8f811](https://github.com/multipliedtwice/prisma-generator-express/commit/dd8f811c33bfee6a2386a00472a8443a7c2c13d9))
+* **CI.yml:** update actions/cache from v2 to v4 to leverage improvements and new features ([b07ad0f](https://github.com/multipliedtwice/prisma-generator-express/commit/b07ad0fa7a4c0611d5a101cef469ccf680f5b328))
+* **CI.yml:** update actions/cache from v2 to v4 to leverage improvements and new features ([d5ce1ed](https://github.com/multipliedtwice/prisma-generator-express/commit/d5ce1ed922b7b5e590eea8307f0a32f11e53934d))
+* lockfile ([3462473](https://github.com/multipliedtwice/prisma-generator-express/commit/3462473bed32ccb3c8de2b4b2e66fd1a3faad866))
+* update yarn.lock ([fd43fe0](https://github.com/multipliedtwice/prisma-generator-express/commit/fd43fe0c6a3bf27f55cfef4bdbc2c684ba374501))
+
 ## [1.16.6](https://github.com/multipliedtwice/prisma-generator-express/compare/v1.16.5...v1.16.6) (2024-09-22)
 
 
