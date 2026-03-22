@@ -58,7 +58,7 @@ export function allow<T extends ZodType>(
   })
 }
 
-export function forbid<T extends z.ZodType>(
+export function forbid<T extends ZodType>(
   schema: T,
   forbiddenPaths: string[],
 ) {
