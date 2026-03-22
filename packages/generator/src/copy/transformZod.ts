@@ -3,10 +3,8 @@ import {
   output,
   z,
   ZodError,
-  ZodIssue,
-  ZodIssueCode,
   ZodObject,
-  ZodTypeAny,
+  ZodType,
 } from 'zod'
 
 function startsWith(str: string, prefix: string): boolean {
@@ -34,7 +32,7 @@ function isKeyAllowed(key: string, allowedPaths: string[]): boolean {
   )
 }
 
-export function allow<T extends ZodTypeAny>(
+export function allow<T extends ZodType>(
   schema: T,
   allowedPaths: string[],
 ) {
@@ -60,7 +58,7 @@ export function allow<T extends ZodTypeAny>(
   })
 }
 
-export function forbid<T extends z.ZodTypeAny>(
+export function forbid<T extends z.ZodType>(
   schema: T,
   forbiddenPaths: string[],
 ) {
@@ -129,10 +127,10 @@ function createZodErrorFromPaths(
   disallowedPaths: string[],
   errorMessage: string,
 ): ZodError {
-  const errors: ZodIssue[] = []
+  const errors: z.core.$ZodIssue[] = []
   for (const path of disallowedPaths) {
     errors.push({
-      code: ZodIssueCode.custom,
+      code: 'custom',
       message: `${errorMessage} '${path}'`,
       path: path.split('.'),
     })
