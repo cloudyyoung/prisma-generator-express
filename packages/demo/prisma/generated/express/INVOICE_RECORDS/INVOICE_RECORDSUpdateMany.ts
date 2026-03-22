@@ -5,12 +5,14 @@ import { Request, Response, NextFunction } from 'express'
 import { RequestHandler, ParamsDictionary } from 'express-serve-static-core'
 import { ZodType } from 'zod'
 
+type UpdateManyResult = { count: number }
+
 interface UpdateManyRequest extends Request {
   prisma: PrismaClient
   body: Prisma.INVOICE_RECORDSUpdateManyArgs
-  outputValidation?: ZodType
+  outputValidation?: ZodType<UpdateManyResult>
   locals?: {
-    outputValidator?: ZodType
+    outputValidator?: ZodType<UpdateManyResult>
   }
 }
 
