@@ -1,7 +1,7 @@
 import { get } from 'lodash'
 import {
+  output,
   z,
-  ZodEffects,
   ZodError,
   ZodIssue,
   ZodIssueCode,
@@ -37,10 +37,11 @@ function isKeyAllowed(key: string, allowedPaths: string[]): boolean {
 export function allow<T extends ZodTypeAny>(
   schema: T,
   allowedPaths: string[],
-): ZodEffects<T, any, any> {
-  const rootSchema = schema instanceof z.ZodObject ? schema.strict() : undefined
+) {
+  const schemaToTransform = schema instanceof z.ZodObject ? schema.strict() : schema
+  const rootSchema = schemaToTransform instanceof z.ZodObject ? schemaToTransform : undefined
 
-  return rootSchema?.transform((data) => {
+  return schemaToTransform.transform((data) => {
     const flatData = flattenObject(data, '', rootSchema)
 
     const disallowedPaths: string[] = []
@@ -56,13 +57,13 @@ export function allow<T extends ZodTypeAny>(
     }
 
     return data
-  }) as unknown as ZodEffects<T, any, any>
+  })
 }
 
 export function forbid<T extends z.ZodTypeAny>(
   schema: T,
   forbiddenPaths: string[],
-): ZodEffects<T, any, any> {
+) {
   return schema.transform((data) => {
     const forbiddenMatches: string[] = []
 
@@ -78,11 +79,11 @@ export function forbid<T extends z.ZodTypeAny>(
       throw createZodErrorFromPaths(forbiddenMatches, 'Field is forbidden:')
     }
     return data
-  }) as ZodEffects<T, any, any>
+  })
 }
 
-export function flattenObject(
-  obj: Record<string, any>,
+export function flattenObject<T>(
+  obj: Record<string, any> | output<T>,
   prefix = '',
   schema?: ZodObject<any>,
 ): Record<string, any> {
